@@ -1,33 +1,29 @@
 package driver;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
+    public static WebDriver driver;
 
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
-    private DriverManager() {}
-
-    public static WebDriver getDriver() {
-        return driver.get();
+    public static WebDriver getDriver(){
+        return driver;
     }
 
-    public static void setDriver(WebDriver driver) {
-        DriverManager.driver.set(driver);
+    @BeforeEach
+    public void setup(){
+        System.setProperty("webdriver.chrome.driver", "src/test/java/driver/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo");
     }
 
-    public static void quit() {
-        DriverManager.driver.get().quit();
-        driver.remove();
-    }
-
-    public static String getInfo() {
-        org.openqa.selenium.Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
-        String browserName = cap.getBrowserName();
-        String platform = cap.getPlatformName().toString();
-        String version = cap.getBrowserVersion();
-
-        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+    @AfterEach
+    public void quit(){
+        driver.quit();
     }
 }
