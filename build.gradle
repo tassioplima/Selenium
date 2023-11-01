@@ -10,19 +10,18 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.'
     implementation 'org.seleniumhq.selenium:selenium-java:4.14.1'
+    implementation 'commons-io:commons-io:2.11.0'
     implementation 'io.qameta.allure:allure-testng:2.24.0'
     implementation 'org.aeonbits.owner:owner-java8:1.0.12'
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 test {
-    useJUnit {
-    }
+    useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
-        showStandardStreams = true
     }
 }

@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.*;
 public class BaseWeb {
     protected WebDriver driver;
 
-    @Parameter({"browser"})
     @BeforeEach
     public void setup(String browserName){
         switch (browserName){
@@ -20,7 +18,7 @@ public class BaseWeb {
                 driver = new FirefoxDriver();
                 break;
         }
-        DriverManager.getDriver().get(configuration().url());
+        DriverManager.getDriver().get("https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo");
     }
 
 
