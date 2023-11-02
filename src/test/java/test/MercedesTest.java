@@ -14,7 +14,9 @@ public class MercedesTest extends DriverManager {
         mercedesPage = new MercedesPage(driver);
     }
     @Test
-    public void testMercedes() {
-        mercedesPage.action();
+    public void testMercedes() throws InterruptedException {
+        mercedesPage.stateClick();
+        mercedesPage.stateScan("New South Wales");
+        mercedesPage.postalCodeInsert("2007");
     }
 }
