@@ -8,8 +8,7 @@ import org.aeonbits.owner.Config.LoadType;
 @Config.Sources({
         "system:properties",
         "classpath:general.properties",
-        "classpath:local.properties",
-        "classpath:selenium-grid.properties"})
+        "classpath:local.properties"})
 public interface Configuration extends Config {
 
     @Key("target")
@@ -18,21 +17,13 @@ public interface Configuration extends Config {
     @Key("browser")
     String browser();
 
-    @Key("headless")
-    Boolean headless();
-
     @Key("url.base")
     String url();
 
     @Key("timeout")
     int timeout();
 
-    @Key("grid.url")
-    String gridUrl();
+    @Key("headless")
+    Boolean headless();
 
-    @Key("grid.port")
-    String gridPort();
-
-    @Key("faker.locale")
-    String faker();
 }

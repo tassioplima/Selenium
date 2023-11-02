@@ -1,5 +1,11 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 group = 'org.example'
@@ -10,19 +16,24 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.24.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.'
     implementation 'org.seleniumhq.selenium:selenium-java:4.14.1'
-    implementation 'io.qameta.allure:allure-testng:2.24.0'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.0'
     implementation 'org.aeonbits.owner:owner-java8:1.0.12'
 }
 
 test {
-    useJUnit {
-    }
+    useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
-        showStandardStreams = true
     }
+    systemProperty "BROWSER", System.getProperty("BROWSER")
+    systemProperty "EXEC", Boolean.getBoolean("EXEC")
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
 }

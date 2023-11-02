@@ -1,33 +1,31 @@
 package driver;
 
+import config.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.Config;
+import org.aeonbits.owner.ConfigCache;
+import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
+import static config.ConfigurationManager.configuration;
 
 public class DriverManager {
+    public static WebDriver driver;
 
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
-    private DriverManager() {}
-
-    public static WebDriver getDriver() {
-        return driver.get();
+    @BeforeEach
+    public void setup(){
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(configuration().url());
     }
 
-    public static void setDriver(WebDriver driver) {
-        DriverManager.driver.set(driver);
-    }
-
-    public static void quit() {
-        DriverManager.driver.get().quit();
-        driver.remove();
-    }
-
-    public static String getInfo() {
-        org.openqa.selenium.Capabilities cap = ((RemoteWebDriver) DriverManager.getDriver()).getCapabilities();
-        String browserName = cap.getBrowserName();
-        String platform = cap.getPlatformName().toString();
-        String version = cap.getBrowserVersion();
-
-        return String.format("browser: %s v: %s platform: %s", browserName, version, platform);
+    @AfterEach
+    public void quit(){
+        driver.quit();
     }
 }
