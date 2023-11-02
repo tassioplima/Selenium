@@ -1,25 +1,27 @@
 package driver;
 
+import config.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.Config;
+import org.aeonbits.owner.ConfigCache;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
+import static config.ConfigurationManager.configuration;
 
 public class DriverManager {
     public static WebDriver driver;
 
-    public static WebDriver getDriver(){
-        return driver;
-    }
-
     @BeforeEach
     public void setup(){
-        System.setProperty("webdriver.chrome.driver", "src/test/java/driver/chromedriver");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo");
+        driver.get(configuration().url());
     }
 
     @AfterEach

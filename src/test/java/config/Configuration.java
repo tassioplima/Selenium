@@ -17,12 +17,13 @@ public interface Configuration extends Config {
     @Key("browser")
     String browser();
 
-    @Key("headless")
-    Boolean headless();
-
     @Key("url.base")
     String url();
 
     @Key("timeout")
     int timeout();
+
+    @Key("headless")
+    Boolean headless();
+
 }
