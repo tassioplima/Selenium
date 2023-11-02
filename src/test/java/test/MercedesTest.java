@@ -8,10 +8,13 @@ import page.MercedesPage;
 public class MercedesTest extends DriverManager {
 
     MercedesPage mercedesPage;
+
+    @BeforeEach
+    public void set(){
+        mercedesPage = new MercedesPage(driver);
+    }
     @Test
     public void testMercedes() {
-        mercedesPage = new MercedesPage(driver);
         mercedesPage.action();
-
     }
 }

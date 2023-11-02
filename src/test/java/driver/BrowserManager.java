@@ -14,7 +14,6 @@ public enum BrowserManager {
         @Override
         public WebDriver createLocalDriver() {
             WebDriverManager.chromedriver().setup();
-
             return new ChromeDriver(getOptions());
         }
 
