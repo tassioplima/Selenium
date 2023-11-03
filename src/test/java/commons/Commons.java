@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class Commons extends DriverManager {
 
-  public static Duration duration = Duration.ofSeconds(45);
+  public static Duration duration = Duration.ofSeconds(30);
 
   public static void waitForVisibilityElement(WebElement element) {
     WebDriverWait wait = new WebDriverWait(driver, duration);

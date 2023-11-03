@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import javax.swing.table.TableRowSorter;
 import java.util.List;
 
 public class MercedesPage extends PagesFactory {
@@ -25,6 +26,9 @@ public class MercedesPage extends PagesFactory {
   @FindBy(tagName = "option")
   private List<WebElement> yourStates;
 
+  @FindBy(css = "input[aria-labelledby]")
+  private WebElement inputPostalCode;
+
   @FindBy(css = "button button--accept-all wb-button hydrated")
   private List<WebElement> acceptCookie;
 
@@ -34,19 +38,13 @@ public class MercedesPage extends PagesFactory {
   @FindBy(xpath = "//*[contains(text(),'Postal Code')]")
   private WebElement postalCode;
 
-  @FindBy(css = "cmm-cookie-banner")
-  private WebElement shadowApp;
+  @FindBy(css = "cmm-cookie-banner[settings-id='Kvbnw4-6_']")
+  private WebElement shadowFather;
 
-  @FindBy(css = "cmm-cookie-banner[class='hydrated']")
-  private WebElement shadowApp2;
-
-  @FindBy(
-      css =
-          " div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > cmm-buttons-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(1) > wb7-button:nth-child(2)")
-  private WebElement shadowApp3;
+  @FindBy(css = "wb7-button[data-test='handle-accept-all-button']")
+  private WebElement shadowButton;
 
   public void stateClick() {
-    // Commons.waitForInvisibilityElement(loadingSpinner);
     Commons.waitForVisibilityElement(yourState);
     yourState.click();
   }
@@ -62,23 +60,12 @@ public class MercedesPage extends PagesFactory {
 
   public void postalCodeInsert(String postal) throws InterruptedException {
     closeCookieShadowRoot();
-    Commons.waitForVisibilityElement(postalCode);
-    postalCode.click();
-    postalCode.sendKeys(postal);
+    inputPostalCode.click();
+    inputPostalCode.sendKeys(postal);
   }
 
   public void closeCookieShadowRoot() throws InterruptedException {
-    // SearchContext shadowFirst = shadowApp2.getShadowRoot();
-    Thread.sleep(1000);
-    SearchContext shadow0 = shadowApp2.getShadowRoot();
-    Thread.sleep(1000);
-    SearchContext shadow1 =
-        shadow0
-            .findElement(
-                By.cssSelector(
-                    " div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > cmm-buttons-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(1) > wb7-button:nth-child(2)"))
-            .getShadowRoot();
-    WebElement shadow3 = shadow1.findElement(By.cssSelector(" button"));
-    System.out.println(shadow3.getText());
+    shadowFather.getShadowRoot().findElement(By.cssSelector("wb7-button[data-test='handle-accept-all-button']")).click();
   }
+
 }
