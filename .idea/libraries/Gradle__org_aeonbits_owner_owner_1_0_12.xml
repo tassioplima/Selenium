@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.aeonbits.owner:owner:1.0.12" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.aeonbits.owner" artifactId="owner" version="1.0.12" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aeonbits.owner/owner/1.0.12/c6ee88593294674c8c8ccdbd855db3f5396a4d19/owner-1.0.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aeonbits.owner/owner/1.0.12/72a3c010f45c530221e44c293421165ffeefdce7/owner-1.0.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
