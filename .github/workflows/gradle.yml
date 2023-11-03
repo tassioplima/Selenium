@@ -1,13 +1,9 @@
-name: Java CI with Gradle
+name: selenium
 
 on:
   push:
     branches-ignore:
-      - '!master'
       - '!main'
-
-permissions:
-  contents: read
 
 jobs:
   build:
@@ -16,14 +12,51 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 14
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gradle/caches
+          key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles('**/build.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.workflow }}-
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
-          distribution: 'temurin'
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install dependencies
+        run: ./gradlew compileTestJava
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew test --tests "MercedesTest" -DBROWSER=headless
+        run: ./gradlew test --tests "MercedesTEst" -DBROWSER=headless
+
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        #id: allure-report
+        with:
+          allure_results: build/allure-results
+          #gh_pages: gh-pages
+          #allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history

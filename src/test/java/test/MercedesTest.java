@@ -19,9 +19,9 @@ public class MercedesTest extends DriverManager {
   public void testMercedes() throws InterruptedException {
     mercedesPage.selectionState("New South Wales");
     mercedesPage.postalCodeInsert("2007");
-    //mercedesPage.selectPrivateAndContinue();
-    //mercedesPage.selectAndChooseColor("Cavansite Blue metallic");
-   // mercedesPage.selectFilterCar();
-   // mercedesPage.getHighPriceCarDetails();
+    mercedesPage.selectPrivateAndContinue();
+    mercedesPage.selectAndChooseColor("Cavansite Blue metallic");
+    mercedesPage.selectFilterCar();
+    mercedesPage.getHighPriceCarDetails();
   }
 }
