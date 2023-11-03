@@ -12,13 +12,13 @@ Configuration:
 Running test:
 
 ``` sh
-./gradlew test --tests "mercedesTest"
+./gradlew test --tests "MercedesTest"
 ```
 
-Running woth diffent web drivers:
+Running with different web drivers:
 
 ``` sh
-./gradlew test --tests "mercedesTest" -Dbrowser=chrome
+./gradlew test --tests "MercedesTest" -Dbrowser=chrome
 ```
 
 ### Building Allure report
