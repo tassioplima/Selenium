@@ -27,4 +27,4 @@ jobs:
           run: chmod +x gradlew
 
       - name: Build with Gradle
-          run: ./gradlew test --tests "MercedesTest" -Dheadless=true
+          run: ./gradlew test --tests "MercedesTest" --DBROWSER=headless
