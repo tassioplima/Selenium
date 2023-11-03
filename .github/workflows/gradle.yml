@@ -33,7 +33,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew test --tests "MercedesTEst" -DBROWSER=headless
+        run: ./gradlew test --tests "MercedesTest" -DBROWSER=headless
 
       - name: Get Allure history
         uses: actions/checkout@v4
