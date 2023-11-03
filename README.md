@@ -3,7 +3,7 @@
 Automation project with Java + Gradle and GitHub Action (CI) doing the remote web test, GithubPages to deploy Allure
 Serve to see test results, PageObject and PageFactory structure.
 
-[![Web Execution](https://github.com/tassioplima/Selenium/workflows/Selenium/badge.svg)](https://github.com/tassioplima/Selenium/actions)
+[![Web Execution](https://github.com/tassioplima/Selenium/workflows/gradle.yml/badge.svg)](https://github.com/tassioplima/Selenium/actions)
 [![Allure Report](https://img.shields.io/badge/Allure%20Report-deployed-yellowgreen)](https://tassioplima.github.io/Selenium/)
 
 Configuration:
@@ -40,3 +40,4 @@ To build a report, and browse it use the following command:
 
 ./gradlew allureServe
 ```
+
