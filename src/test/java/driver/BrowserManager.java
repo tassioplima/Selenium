@@ -10,46 +10,46 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 public enum BrowserManager {
-    CHROME {
-        @Override
-        public WebDriver createLocalDriver() {
-            WebDriverManager.chromedriver().setup();
-            return new ChromeDriver(getOptions());
-        }
+  CHROME {
+    @Override
+    public WebDriver createLocalDriver() {
+      WebDriverManager.chromedriver().setup();
+      return new ChromeDriver(getOptions());
+    }
 
-        @Override
-        public ChromeOptions getOptions() {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("START_MAXIMIZED");
-            chromeOptions.addArguments("DISABLE_INFOBARS");
-            chromeOptions.addArguments("DISABLE_NOTIFICATIONS");
-            chromeOptions.addArguments("REMOTE_ALLOW_ORIGINS");
+    @Override
+    public ChromeOptions getOptions() {
+      var chromeOptions = new ChromeOptions();
+      chromeOptions.addArguments("START_MAXIMIZED");
+      chromeOptions.addArguments("DISABLE_INFOBARS");
+      chromeOptions.addArguments("DISABLE_NOTIFICATIONS");
+      chromeOptions.addArguments("REMOTE_ALLOW_ORIGINS");
 
-            if (configuration().headless()) chromeOptions.addArguments("CHROME_HEADLESS");
+      if (configuration().headless()) chromeOptions.addArguments("CHROME_HEADLESS");
 
-            return chromeOptions;
-        }
-    }, FIREFOX {
-        @Override
-        public WebDriver createLocalDriver() {
-            WebDriverManager.firefoxdriver().setup();
+      return chromeOptions;
+    }
+  },
+  FIREFOX {
+    @Override
+    public WebDriver createLocalDriver() {
+      WebDriverManager.firefoxdriver().setup();
 
-            return new FirefoxDriver(new FirefoxOptions());
-        }
+      return new FirefoxDriver(new FirefoxOptions());
+    }
 
+    @Override
+    public FirefoxOptions getOptions() {
+      var firefoxOptions = new FirefoxOptions();
+      firefoxOptions.addArguments("START_MAXIMIZED");
 
-        @Override
-        public FirefoxOptions getOptions() {
-            var firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments("START_MAXIMIZED");
+      if (configuration().headless()) firefoxOptions.addArguments("GENERIC_HEADLESS");
 
-            if (configuration().headless()) firefoxOptions.addArguments("GENERIC_HEADLESS");
+      return firefoxOptions;
+    }
+  };
 
-            return firefoxOptions;
-        }
-    };
+  public abstract WebDriver createLocalDriver();
 
-    public abstract WebDriver createLocalDriver();
-
-    public abstract AbstractDriverOptions<?> getOptions();
+  public abstract AbstractDriverOptions<?> getOptions();
 }
