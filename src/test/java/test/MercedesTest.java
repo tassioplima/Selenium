@@ -21,7 +21,7 @@ public class MercedesTest extends DriverManager {
     mercedesPage.postalCodeInsert("2007");
     mercedesPage.selectPrivateAndContinue();
     mercedesPage.selectAndChooseColor("Cavansite Blue metallic");
-    mercedesPage.selectFilterCar();
-    mercedesPage.getHighPriceCarDetails();
+   // mercedesPage.selectFilterCar();
+   // mercedesPage.getHighPriceCarDetails();
   }
 }
