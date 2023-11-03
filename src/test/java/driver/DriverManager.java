@@ -17,32 +17,35 @@ public class DriverManager {
   @BeforeEach
   public void setup() throws Exception{
 
-    switch (BrowserManager.BROWSER.getEnv()){
+    String browser = BrowserManager.BROWSER.getEnv();
+
+    switch (browser){
 
       case "chrome":
-
-        driver = new ChromeDriver(OptionsManager.chromeOptions());
+        if(!BrowserManager.HEADLESS.getEnv()){
+            driver = new ChromeDriver(OptionsManager.chromeOptions());
+        } else {
+            driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
+        }
         WebDriverManager.chromedriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
-        break;
+s        break;
 
       case "firefox":
 
-        driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        if(!BrowserManager.HEADLESS.getEnv()){
+          driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        } else {
+          driver = new FirefoxDriver(OptionsManager.firefoxOptionsHeadless());
+        }
         WebDriverManager.firefoxdriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
         break;
 
-      case "headless":
-
-        driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
-        WebDriverManager.chromedriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
-        break;
+      default:
+        throw new IllegalArgumentException("Unsupported browser: " + browser);
     }
+
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.get(configuration().url());
 
   }
 

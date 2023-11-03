@@ -32,7 +32,7 @@ test {
         events "passed", "skipped", "failed"
     }
     systemProperty "BROWSER", System.getProperty("BROWSER")
-    systemProperty "EXEC", Boolean.getBoolean("EXEC")
+    systemProperty "HEADLESS", Boolean.getBoolean("HEADLESS")
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")
     systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
