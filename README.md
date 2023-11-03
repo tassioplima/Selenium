@@ -15,7 +15,7 @@ Running test:
 ./gradlew test --tests "mercedesTest"
 ```
 
-Running woth diffent web drivers:
+Running with different web drivers:
 
 ``` sh
 ./gradlew test --tests "mercedesTest" -Dbrowser=chrome

@@ -65,16 +65,16 @@ public class MercedesPage extends PagesFactory {
         postalCode.sendKeys(postal);
     }
 
-    public void closeCookieShadowRoot() throws InterruptedException {
-        //SearchContext shadowFirst = shadowApp2.getShadowRoot();
-        Thread.sleep(1000);
+    public void closeCookieShadowRoot() {
         SearchContext shadow0 = shadowApp2.getShadowRoot();
-        Thread.sleep(1000);
         SearchContext shadow1 = shadow0.findElement(By.cssSelector(" div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > cmm-buttons-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(1) > wb7-button:nth-child(2)")).getShadowRoot();
-        WebElement shadow3  = shadow1.findElement(By.cssSelector(" button"));
-        System.out.println(shadow3.getText());
+        WebElement shadow3  = shadow1.findElement(By.cssSelector("button.button"));
+        Commons.waitForElementToBeClickable(shadow3);
 
-        // WebElement shadow3 = shadow2.findElement(By.cssSelector(" button:nth-child(1) > slot:nth-child(1)"));
+        shadow3.click();
+
+        //WebElement shadow3  = shadow1.findElement(By.cssSelector(" .button"));
+        //WebElement shadow3  = shadow1.findElement(By.cssSelector("  button:nth-child(1) > slot:nth-child(1)"));
     }
 
 }
