@@ -2,6 +2,7 @@ package page;
 
 import commons.Commons;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class MercedesPage extends PagesFactory {
   private WebDriver driver;
+  public String vimNumber;
+  public String modelYear;
 
   public MercedesPage(WebDriver driver) {
     super(driver);
@@ -57,14 +60,36 @@ public class MercedesPage extends PagesFactory {
   @FindBy(css = ".show > path")
   private WebElement clickOnFilter;
 
-  @FindBy(css = "#app > div.dcp-shop > main > div.dcp-shop__container > div.dcp-cars-srp > div.wrapper.show > div.sidebar.sticky-bar-active > div > div > div.dcp-cars-filter-widget > div.fab-filter > div:nth-child(7) > div > div.category-filter-row-headline > p")
+  @FindBy(css = ".dcp-filter-wrapper:nth-child(7) .category-filter-row-headline")
   private WebElement clickOnColour;
 
   @FindBy(css = "button[class='wb-button wb-button--tertiary wb-button--medium']")
   private List<WebElement> preOwnerList;
 
-  @FindBy(linkText = "Colour")
-  private WebElement linkColour;
+  @FindBy(css = ".category-filter-row-headline__text")
+  private List<WebElement> menuFilterList;
+
+  @FindBy(css = ".dcp-filter-wrapper:nth-child(7) .dcp-multi-select-dropdown__frame")
+  private WebElement openColourFilter;
+
+  @FindBy(linkText = "BRILLANTBLUE metallic")
+  private WebElement colourSelect;
+
+  @FindBy(css = "dcp-cars-srp__sorting-dropdown hydrated")
+  private WebElement openFilterCar;
+
+  @FindBy(css = "select")
+  private List<WebElement> openFilterCarList;
+
+  @FindBy(css = "[value='price-desc-ucos']")
+  private WebElement openHighPrices;
+
+  @FindBy(css = ".dcp-cars-srp-results__tile")
+  private List<WebElement> openListCars;
+
+  @FindBy(css = ".dcp-vehicle-details-list-item__label")
+  private List<WebElement> listDetailsModel;
+
 
   public void stateClick() {
     Commons.waitForInvisibilityElement(loadingSpinner);
@@ -101,9 +126,9 @@ public class MercedesPage extends PagesFactory {
   }
 
   public void selectContinue(){
-    Commons.waitForVisibilityElement(continueButton);
+    Commons.waitForElementToBeClickable(continueButton);
     continueButton.click();
-    Commons.waitForInvisibilityElement(continueButton);
+    //Commons.waitForInvisibilityElement(continueButton);
   }
 
   public void selectPrivateAndContinue(){
@@ -120,8 +145,32 @@ public class MercedesPage extends PagesFactory {
 
   public void selectAndChooseColor (String colour) throws InterruptedException {
     selectFilter();
-    Commons.moveToElementByWebElement(clickOnColour);
-    clickOnColour.click();
+    Commons.waitForInvisibilityElement(loadingSpinner);
+    Commons.scrollDown();
+    Commons.moveToElementByWebElement(menuFilterList.get(6));
+    menuFilterList.get(6).click();
+    Commons.scrollDown();
+    openColourFilter.click();
+    colourSelect.click();
+  }
+
+  public void selectFilterCar() {
+    Commons.waitForVisibilityElement(openFilterCar);
+    openFilterCar.click();
+    openHighPrices.click();
+  }
+
+  public void getHighPriceCarDetails() {
+    openListCars.get(0).click();
+
+    for (WebElement option : listDetailsModel) {
+      if (option.getText().equals("Model Year")) {
+        String modelYear = (String)((JavascriptExecutor)driver).executeScript("return arguments[0].childNodes[2].textContent;", option);
+        break;
+      }
+      System.out.println(modelYear);
+    }
+
   }
 
 
