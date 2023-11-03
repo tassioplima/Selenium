@@ -8,7 +8,7 @@ Serve to see test results, PageObject and PageFactory structure.
 
 Configuration:
 
-- Java JDK 11
+- Java JDK +11
 
 Running test:
 
@@ -17,8 +17,9 @@ cd ./Selenium
 gradlew test --tests "MercedesTest"
 ```
 
-Running woth diffent web drivers:
+Running with different web drivers:
 
+<<<<<<< HEAD
 ``` bash
 cd ./Selenium
 gradlew test --tests "MercedesTest" -Dbrowser=chrome

@@ -80,8 +80,5 @@ public class MercedesPage extends PagesFactory {
             .getShadowRoot();
     WebElement shadow3 = shadow1.findElement(By.cssSelector(" button"));
     System.out.println(shadow3.getText());
-
-    // WebElement shadow3 = shadow2.findElement(By.cssSelector(" button:nth-child(1) >
-    // slot:nth-child(1)"));
   }
 }
