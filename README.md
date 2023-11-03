@@ -8,21 +8,24 @@ Serve to see test results, PageObject and PageFactory structure.
 
 Configuration:
 
-- Java JDK +11
+- Java JDK +14
 
 Running test:
 
 ``` bash
-cd ./Selenium
-gradlew test --tests "MercedesTest"
+./gradlew test --tests "MercedesTest"
 ```
 
 Running with different web drivers:
 
-<<<<<<< HEAD
 ``` bash
-cd ./Selenium
-gradlew test --tests "MercedesTest" -Dbrowser=chrome
+./gradlew test --tests "MercedesTest" -DBROWSER=chrome
+```
+
+Running headless:
+
+``` bash
+./gradlew test --tests "MercedesTest" -DBROWSER=headless
 ```
 
 ### Building Allure report
@@ -30,8 +33,6 @@ gradlew test --tests "MercedesTest" -Dbrowser=chrome
 To build a report, and browse it use the following command:
 
 ``` bash
-cd ./Selenium
-gradlew allureServe
-```
 
-GitHub Pages with Allure report results: [ALLURE](https://tassioplima.github.io/Selenium/)
+./gradlew allureServe
+```
