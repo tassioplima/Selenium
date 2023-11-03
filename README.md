@@ -14,14 +14,14 @@ Running test:
 
 ``` bash
 cd ./Selenium
-gradlew test --tests "mercedesTest"
+gradlew test --tests "MercedesTest"
 ```
 
 Running woth diffent web drivers:
 
 ``` bash
 cd ./Selenium
-gradlew test --tests "mercedesTest" -Dbrowser=chrome
+gradlew test --tests "MercedesTest" -Dbrowser=chrome
 ```
 
 ### Building Allure report
