@@ -34,7 +34,6 @@ public enum BrowserManager {
     @Override
     public WebDriver createLocalDriver() {
       WebDriverManager.firefoxdriver().setup();
-
       return new FirefoxDriver(new FirefoxOptions());
     }
 
