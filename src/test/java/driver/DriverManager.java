@@ -16,13 +16,15 @@ public class DriverManager {
   @BeforeEach
   public void setup() {
     ChromeOptions options = new ChromeOptions();
+
     options.addArguments("--disable-notifications");
     options.addArguments("--start-fullscreen");
     options.addArguments("--disable-infobars");
     options.addArguments("--remote-allow-origins");
     options.addArguments("--disable-popup-blocking");
     options.addArguments("notCookies");
-    WebDriverManager.chromedriver().setup(options);
+
+    WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver(options);
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.get(configuration().url());
