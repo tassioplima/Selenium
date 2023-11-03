@@ -3,7 +3,6 @@ package test;
 import driver.DriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import page.MercedesPage;
 
 public class MercedesTest extends DriverManager {
@@ -17,9 +16,9 @@ public class MercedesTest extends DriverManager {
 
   @Test
   public void testMercedes() throws InterruptedException {
-    mercedesPage.stateClick();
-    mercedesPage.stateScan("New South Wales");
+    mercedesPage.selectionState("New South Wales");
     mercedesPage.postalCodeInsert("2007");
     mercedesPage.selectPrivateAndContinue();
+    mercedesPage.selectAndChooseColor("Cavansite Blue metallic");
   }
 }

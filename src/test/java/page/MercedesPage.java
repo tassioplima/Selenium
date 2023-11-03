@@ -54,6 +54,18 @@ public class MercedesPage extends PagesFactory {
   @FindBy(css = ".dcp-state-selected-modal__close")
   private WebElement continueButton;
 
+  @FindBy(css = ".show > path")
+  private WebElement clickOnFilter;
+
+  @FindBy(css = "#app > div.dcp-shop > main > div.dcp-shop__container > div.dcp-cars-srp > div.wrapper.show > div.sidebar.sticky-bar-active > div > div > div.dcp-cars-filter-widget > div.fab-filter > div:nth-child(7) > div > div.category-filter-row-headline > p")
+  private WebElement clickOnColour;
+
+  @FindBy(css = "button[class='wb-button wb-button--tertiary wb-button--medium']")
+  private List<WebElement> preOwnerList;
+
+  @FindBy(linkText = "Colour")
+  private WebElement linkColour;
+
   public void stateClick() {
     Commons.waitForInvisibilityElement(loadingSpinner);
     Commons.waitForVisibilityElement(yourState);
@@ -69,11 +81,16 @@ public class MercedesPage extends PagesFactory {
     }
   }
 
-  public void closeCookieShadowRoot() throws InterruptedException {
+  public void selectionState(String state){
+    stateClick();
+    stateScan(state);
+  }
+
+  public void closeCookieShadowRoot() {
     shadowFather.getShadowRoot().findElement(By.cssSelector("wb7-button[data-test='handle-accept-all-button']")).click();
   }
 
-  public void postalCodeInsert(String postal) throws InterruptedException {
+  public void postalCodeInsert(String postal) {
     closeCookieShadowRoot();
     inputPostalCode.click();
     inputPostalCode.sendKeys(postal);
@@ -84,7 +101,9 @@ public class MercedesPage extends PagesFactory {
   }
 
   public void selectContinue(){
+    Commons.waitForVisibilityElement(continueButton);
     continueButton.click();
+    Commons.waitForInvisibilityElement(continueButton);
   }
 
   public void selectPrivateAndContinue(){
@@ -92,6 +111,18 @@ public class MercedesPage extends PagesFactory {
     selectContinue();
   }
 
+  public void selectFilter()  {
+    Commons.waitForElementToBeClickable(clickOnFilter);
+    clickOnFilter.click();
+    Commons.waitForVisibilityElement(preOwnerList.get(0));
+    preOwnerList.get(0).click();
+  }
+
+  public void selectAndChooseColor (String colour) throws InterruptedException {
+    selectFilter();
+    Commons.moveToElementByWebElement(clickOnColour);
+    clickOnColour.click();
+  }
 
 
 }
