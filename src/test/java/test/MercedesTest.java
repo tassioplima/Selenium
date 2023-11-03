@@ -20,5 +20,6 @@ public class MercedesTest extends DriverManager {
     mercedesPage.stateClick();
     mercedesPage.stateScan("New South Wales");
     mercedesPage.postalCodeInsert("2007");
+    mercedesPage.selectPrivateAndContinue();
   }
 }

@@ -2,12 +2,10 @@ package page;
 
 import commons.Commons;
 import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.swing.table.TableRowSorter;
 import java.util.List;
 
 public class MercedesPage extends PagesFactory {
@@ -44,7 +42,20 @@ public class MercedesPage extends PagesFactory {
   @FindBy(css = "wb7-button[data-test='handle-accept-all-button']")
   private WebElement shadowButton;
 
+  @FindBy(css = ".wb-margin-bottom-xs:nth-child(1) .wb-radio-control__indicator")
+  private WebElement privateButton;
+
+  @FindBy(css = ".wb-margin-bottom-xs:nth-child(2) .wb-radio-control__indicator")
+  private WebElement businessButton;
+
+  @FindBy(css = "input[type=radio]")
+  private List<WebElement> listPrivateBusiness;
+
+  @FindBy(css = ".dcp-state-selected-modal__close")
+  private WebElement continueButton;
+
   public void stateClick() {
+    Commons.waitForInvisibilityElement(loadingSpinner);
     Commons.waitForVisibilityElement(yourState);
     yourState.click();
   }
@@ -58,14 +69,29 @@ public class MercedesPage extends PagesFactory {
     }
   }
 
+  public void closeCookieShadowRoot() throws InterruptedException {
+    shadowFather.getShadowRoot().findElement(By.cssSelector("wb7-button[data-test='handle-accept-all-button']")).click();
+  }
+
   public void postalCodeInsert(String postal) throws InterruptedException {
     closeCookieShadowRoot();
     inputPostalCode.click();
     inputPostalCode.sendKeys(postal);
   }
 
-  public void closeCookieShadowRoot() throws InterruptedException {
-    shadowFather.getShadowRoot().findElement(By.cssSelector("wb7-button[data-test='handle-accept-all-button']")).click();
+  public void selectPrivate() {
+    privateButton.click();
   }
+
+  public void selectContinue(){
+    continueButton.click();
+  }
+
+  public void selectPrivateAndContinue(){
+    selectPrivate();
+    selectContinue();
+  }
+
+
 
 }
