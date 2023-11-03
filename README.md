@@ -22,6 +22,10 @@ Running with different web drivers:
 ./gradlew test --tests "MercedesTest" -DBROWSER=chrome
 ```
 
+``` bash
+./gradlew test --tests "MercedesTest" -DBROWSER=firefox
+```
+
 Running headless:
 
 ``` bash
