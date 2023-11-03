@@ -8,30 +8,47 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 public class DriverManager {
   public static WebDriver driver;
 
   @BeforeEach
-  public void setup() {
-    ChromeOptions options = new ChromeOptions();
+  public void setup() throws Exception{
 
-    options.addArguments("--disable-notifications");
-    options.addArguments("--start-fullscreen");
-    options.addArguments("--disable-infobars");
-    options.addArguments("--remote-allow-origins");
-    options.addArguments("--disable-popup-blocking");
-    options.addArguments("notCookies");
+    switch (BrowserManager.BROWSER.getEnv()){
 
-    WebDriverManager.chromedriver().setup();
-    driver = new ChromeDriver(options);
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    driver.get(configuration().url());
+      case "chrome":
+
+        driver = new ChromeDriver(OptionsManager.chromeOptions());
+        WebDriverManager.chromedriver().setup();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(configuration().url());
+        break;
+
+      case "firefox":
+
+        driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        WebDriverManager.firefoxdriver().setup();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(configuration().url());
+        break;
+
+      case "headless":
+
+        driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
+        WebDriverManager.chromedriver().setup();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(configuration().url());
+        break;
+    }
+
   }
 
   @AfterEach
   public void quit() {
     driver.quit();
   }
+
 }

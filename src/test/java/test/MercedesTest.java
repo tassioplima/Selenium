@@ -1,5 +1,6 @@
 package test;
 
+import driver.BrowserManager;
 import driver.DriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
