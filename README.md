@@ -3,7 +3,7 @@
 Automation project with Java + Gradle and GitHub Action (CI) doing the remote web test, GithubPages to deploy Allure
 Serve to see test results, PageObject and PageFactory structure.
 
-![Selenium CI](https://github.com/github/docs/actions/workflows/gradle.yml/badge.svg)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/tassioplima/Selenium/gradle.yml)
 [![Allure Report](https://img.shields.io/badge/Allure%20Report-deployed-yellowgreen)](https://tassioplima.github.io/Selenium/)
 
 Configuration:
