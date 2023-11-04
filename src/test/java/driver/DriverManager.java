@@ -10,39 +10,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
 public class DriverManager {
   public static WebDriver driver;
 
   @BeforeEach
   public void setup() throws Exception{
 
-    switch (BrowserManager.BROWSER.getEnv()){
+    String browser = BrowserManager.BROWSER.getEnv();
 
+    switch (browser){
       case "chrome":
-
-        driver = new ChromeDriver(OptionsManager.chromeOptions());
+        if(BrowserManager.HEADLESS.getBool()){
+            driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
+        } else {
+            driver = new ChromeDriver(OptionsManager.chromeOptions());
+        }
         WebDriverManager.chromedriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
         break;
 
       case "firefox":
-
-        driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        if(BrowserManager.HEADLESS.getBool()){
+            driver = new FirefoxDriver(OptionsManager.firefoxOptionsHeadless());
+        } else {
+            driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        }
         WebDriverManager.firefoxdriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
         break;
 
-      case "headless":
-
-        driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
-        WebDriverManager.chromedriver().setup();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(configuration().url());
-        break;
+      default:
+        throw new IllegalArgumentException("Unsupported browser: " + browser);
     }
+
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.get(configuration().url());
 
   }
 
