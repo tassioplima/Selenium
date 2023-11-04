@@ -37,7 +37,9 @@ Running headless:
 To build a report, and browse it use the following command:
 
 ``` bash
-
 ./gradlew allureServe
 ```
 
+Github Pages with Allure report results: [ALLURE](https://tassioplima.github.io/Selenium/)
+
+![img.png](img/img.png)

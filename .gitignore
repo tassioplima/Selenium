@@ -6,6 +6,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/compiler.xml
+*.txt
 
 
 # AWS User-specific
