@@ -27,7 +27,7 @@ public class MercedesTest extends DriverManager {
   public void testMercedes() {
     mercedesPage.selectionState("New South Wales");
     mercedesPage.postalCodeInsert("2007");
-    mercedesFilterPage.selectAndChooseColour("BRILLANTBLUE metallic");
+    mercedesFilterPage.selectAndChooseColour();
     mercedesFilterPage.selectCarAndPriceFilter();
     mercedesCarDetailsPage.detailsAndExport();
     mercedeContactDetailsPage.insertDataAndValidateError("tassio.com");
