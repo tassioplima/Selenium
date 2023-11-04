@@ -114,14 +114,8 @@ public class MercedesFilterPage extends PagesFactory {
 
     @Step
     public void getHighPriceCarDetails() {
-        try {
-            Commons.waitForVisibilityElement(openListCars.get(0));
-            openListCars.get(0).click();
-        } catch (Exception e) {
-            System.out.println("Error click filter car");
-        }
-
-
+        Commons.waitForVisibilityElement(openListCars.get(0));
+        openListCars.get(0).click();
     }
 
     @Step
