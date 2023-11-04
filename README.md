@@ -29,7 +29,7 @@ Running with different web drivers:
 Running headless:
 
 ``` bash
-./gradlew test --tests "MercedesTest" -DBROWSER=headless
+./gradlew test --tests "MercedesTest" -DBROWSER=chrome -DHEADLESS=true
 ```
 
 ### Building Allure report

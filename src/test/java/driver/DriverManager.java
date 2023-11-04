@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
 public class DriverManager {
   public static WebDriver driver;
 
@@ -20,22 +19,20 @@ public class DriverManager {
     String browser = BrowserManager.BROWSER.getEnv();
 
     switch (browser){
-
       case "chrome":
-        if(!BrowserManager.HEADLESS.getEnv()){
-            driver = new ChromeDriver(OptionsManager.chromeOptions());
-        } else {
+        if(BrowserManager.HEADLESS.getBool()){
             driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
+        } else {
+            driver = new ChromeDriver(OptionsManager.chromeOptions());
         }
         WebDriverManager.chromedriver().setup();
-s        break;
+        break;
 
       case "firefox":
-
-        if(!BrowserManager.HEADLESS.getEnv()){
-          driver = new FirefoxDriver(OptionsManager.firefoxOptions());
+        if(BrowserManager.HEADLESS.getBool()){
+            driver = new FirefoxDriver(OptionsManager.firefoxOptionsHeadless());
         } else {
-          driver = new FirefoxDriver(OptionsManager.firefoxOptionsHeadless());
+            driver = new FirefoxDriver(OptionsManager.firefoxOptions());
         }
         WebDriverManager.firefoxdriver().setup();
         break;
