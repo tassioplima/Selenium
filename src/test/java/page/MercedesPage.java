@@ -143,7 +143,7 @@ public class MercedesPage extends PagesFactory {
     preOwnerList.get(0).click();
   }
 
-  public void selectAndChooseColor (String colour) throws InterruptedException {
+  public void selectAndChooseColor (String colour) {
     selectFilter();
     Commons.waitForInvisibilityElement(loadingSpinner);
     Commons.scrollDown();
@@ -172,6 +172,5 @@ public class MercedesPage extends PagesFactory {
     }
 
   }
-
 
 }

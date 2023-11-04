@@ -20,25 +20,18 @@ public class DriverManager {
 
     switch (browser){
       case "chrome":
-        if(BrowserManager.HEADLESS.getBool()){
-            driver = new ChromeDriver(OptionsManager.chromeOptionsHeadless());
-        } else {
-            driver = new ChromeDriver(OptionsManager.chromeOptions());
-        }
+        driver = new ChromeDriver(OptionsManager.chromeOptions());
         WebDriverManager.chromedriver().setup();
         break;
 
       case "firefox":
-        if(BrowserManager.HEADLESS.getBool()){
-            driver = new FirefoxDriver(OptionsManager.firefoxOptionsHeadless());
-        } else {
-            driver = new FirefoxDriver(OptionsManager.firefoxOptions());
-        }
+        driver = new FirefoxDriver(OptionsManager.firefoxOptions());
         WebDriverManager.firefoxdriver().setup();
         break;
 
       default:
-        throw new IllegalArgumentException("Unsupported browser: " + browser);
+        driver = new ChromeDriver(OptionsManager.chromeOptions());
+        WebDriverManager.chromedriver().setup();
     }
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
