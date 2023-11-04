@@ -1,6 +1,5 @@
 package test;
 
-import driver.BrowserManager;
 import driver.DriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,4 +23,5 @@ public class MercedesTest extends DriverManager {
     mercedesPage.selectFilterCar();
     mercedesPage.getHighPriceCarDetails();
   }
+
 }
