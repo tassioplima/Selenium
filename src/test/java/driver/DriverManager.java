@@ -2,10 +2,12 @@ package driver;
 
 import static config.ConfigurationManager.configuration;
 
+import commons.Print;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -40,7 +42,9 @@ public class DriverManager {
   }
 
   @AfterEach
-  public void quit() {
+  public void quit(TestInfo info) {
+    Print.takeScreenShot(info);
+    Print.screenShot();
     driver.quit();
   }
 

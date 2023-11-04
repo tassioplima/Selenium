@@ -15,6 +15,8 @@ public class MercedeContactDetailsPage extends PagesFactory{
         super(driver);
     }
 
+    @FindBy(className = "dcp-loading-spinner")
+    private WebElement loadingSpinner;
     @FindBy(xpath = "//*[@inputmode='email']")
     private WebElement emailField;
 
@@ -27,9 +29,12 @@ public class MercedeContactDetailsPage extends PagesFactory{
     @FindBy(xpath = "//*[@class='dcp-error-message__error-hint']")
     private WebElement errorLabel;
 
+    @FindBy(xpath = "//*[contains(text(),'Contact Details and Account Creation')]")
+    private WebElement waitForm;
+
     @Step
     public void insertInvalidEmail(String email) {
-        Commons.scrollToElement(emailField);
+        Commons.waitForInvisibilityElement(loadingSpinner);
         emailField.sendKeys(email);
     }
 

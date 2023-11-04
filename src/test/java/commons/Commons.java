@@ -46,9 +46,20 @@ public class Commons extends DriverManager {
     WebDriverWait wait = new WebDriverWait(driver, duration);
   }
 
+  public static void waitForElementPresenceLocated(String xpath) {
+    WebDriverWait wait = new WebDriverWait(driver, duration);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+
+  }
+
   public static void scrollToElement (WebElement element) {
-    Actions actions = new Actions(driver);
-    actions.scrollToElement(element).perform();
+    try {
+      Actions actions = new Actions(driver);
+      actions.scrollToElement(element).perform();
+    } catch (Exception e){
+
+    }
+
   }
 
   public static void moveToElementByCSS (String elementSelect) {
