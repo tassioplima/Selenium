@@ -38,7 +38,8 @@ public class DriverManager {
         break;
 
       default:
-        throw new IllegalArgumentException("Unsupported browser: " + browser);
+        driver = new ChromeDriver(OptionsManager.chromeOptions());
+        WebDriverManager.chromedriver().setup();
     }
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
