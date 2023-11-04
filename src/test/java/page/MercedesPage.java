@@ -1,8 +1,8 @@
 package page;
 
 import commons.Commons;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,8 +11,7 @@ import java.util.List;
 
 public class MercedesPage extends PagesFactory {
   private WebDriver driver;
-  public String vimNumber;
-  public String modelYear;
+
 
   public MercedesPage(WebDriver driver) {
     super(driver);
@@ -57,6 +56,9 @@ public class MercedesPage extends PagesFactory {
   @FindBy(css = ".dcp-state-selected-modal__close")
   private WebElement continueButton;
 
+  @FindBy(xpath = "//button[@data-test-id='state-selected-modal__close']")
+  private WebElement continueButtonXpath;
+
   @FindBy(css = ".show > path")
   private WebElement clickOnFilter;
 
@@ -75,28 +77,30 @@ public class MercedesPage extends PagesFactory {
   @FindBy(linkText = "BRILLANTBLUE metallic")
   private WebElement colourSelect;
 
-  @FindBy(css = "dcp-cars-srp__sorting-dropdown hydrated")
+  @FindBy(xpath = "//*[contains(text(),'Relevance')]")
   private WebElement openFilterCar;
 
   @FindBy(css = "select")
   private List<WebElement> openFilterCarList;
 
-  @FindBy(css = "[value='price-desc-ucos']")
+  @FindBy(xpath = "//option[@value='price-desc-ucos']")
   private WebElement openHighPrices;
 
-  @FindBy(css = ".dcp-cars-srp-results__tile")
+  @FindBy(xpath = "//*[@class='dcp-cars-srp-results__tile']")
   private List<WebElement> openListCars;
 
   @FindBy(css = ".dcp-vehicle-details-list-item__label")
   private List<WebElement> listDetailsModel;
 
 
+  @Step
   public void stateClick() {
     Commons.waitForInvisibilityElement(loadingSpinner);
     Commons.waitForVisibilityElement(yourState);
     yourState.click();
   }
 
+  @Step
   public void stateScan(String state) {
     for (WebElement option : yourStates) {
       if (option.getText().equals(state)) {
@@ -106,71 +110,36 @@ public class MercedesPage extends PagesFactory {
     }
   }
 
+  @Step
   public void selectionState(String state){
     stateClick();
     stateScan(state);
   }
 
+  @Step
   public void closeCookieShadowRoot() {
     shadowFather.getShadowRoot().findElement(By.cssSelector("wb7-button[data-test='handle-accept-all-button']")).click();
   }
 
+  @Step
   public void postalCodeInsert(String postal) {
     closeCookieShadowRoot();
     inputPostalCode.click();
     inputPostalCode.sendKeys(postal);
-  }
-
-  public void selectPrivate() {
-    privateButton.click();
-  }
-
-  public void selectContinue(){
-    Commons.waitForElementToBeClickable(continueButton);
-    continueButton.click();
-    //Commons.waitForInvisibilityElement(continueButton);
-  }
-
-  public void selectPrivateAndContinue(){
     selectPrivate();
     selectContinue();
   }
 
-  public void selectFilter()  {
-    Commons.waitForElementToBeClickable(clickOnFilter);
-    clickOnFilter.click();
-    Commons.waitForVisibilityElement(preOwnerList.get(0));
-    preOwnerList.get(0).click();
+  @Step
+  public void selectPrivate() {
+    Commons.waitForElementToBeClickable(privateButton);
+    privateButton.click();
   }
 
-  public void selectAndChooseColor (String colour) {
-    selectFilter();
-    Commons.waitForInvisibilityElement(loadingSpinner);
-    Commons.scrollDown();
-    Commons.moveToElementByWebElement(menuFilterList.get(6));
-    menuFilterList.get(6).click();
-    Commons.scrollDown();
-    openColourFilter.click();
-    colourSelect.click();
-  }
-
-  public void selectFilterCar() {
-    Commons.waitForVisibilityElement(openFilterCar);
-    openFilterCar.click();
-    openHighPrices.click();
-  }
-
-  public void getHighPriceCarDetails() {
-    openListCars.get(0).click();
-
-    for (WebElement option : listDetailsModel) {
-      if (option.getText().equals("Model Year")) {
-        String modelYear = (String)((JavascriptExecutor)driver).executeScript("return arguments[0].childNodes[2].textContent;", option);
-        break;
-      }
-      System.out.println(modelYear);
-    }
-
+  @Step
+  public void selectContinue() {
+    Commons.waitForElementToBeClickable(continueButtonXpath);
+    continueButtonXpath.click();
   }
 
 }

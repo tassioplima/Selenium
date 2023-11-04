@@ -9,6 +9,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 
 public class Commons extends DriverManager {
@@ -30,14 +32,23 @@ public class Commons extends DriverManager {
     wait.until(ExpectedConditions.elementToBeClickable(element));
   }
 
+  public static void waitForElementToBeLocated(String xpath) {
+    WebDriverWait wait = new WebDriverWait(driver, duration);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+  }
+
+  public static void waitForElementToBeInvisibleLocated(String xpath) {
+    WebDriverWait wait = new WebDriverWait(driver, duration);
+    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
+  }
+
   public static void waitForElementFromShadow(WebElement element) {
     WebDriverWait wait = new WebDriverWait(driver, duration);
   }
 
-  public static void moveToElement (WebElement element) {
+  public static void scrollToElement (WebElement element) {
     Actions actions = new Actions(driver);
-    actions.moveToElement(element);
-    actions.perform();
+    actions.scrollToElement(element).perform();
   }
 
   public static void moveToElementByCSS (String elementSelect) {
@@ -75,6 +86,17 @@ public class Commons extends DriverManager {
       js.executeScript("window.scrollBy(0,250)","");
     } catch (NullPointerException e) {
       System.out.println(e.getMessage());
+    }
+  }
+
+  public static void exportFileString(String model,String vin) {
+    try {
+      FileWriter writer = new FileWriter("details.txt"); // Specify the file name
+      writer.write(model + " " + " " + vin);
+      writer.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
