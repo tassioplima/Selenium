@@ -1,12 +1,10 @@
 package commons;
 
 import driver.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileWriter;
@@ -16,6 +14,7 @@ import java.time.Duration;
 public class Commons extends DriverManager {
 
   public static Duration duration = Duration.ofSeconds(30);
+  public static long wait = 30;
 
   public static void waitForVisibilityElement(WebElement element) {
     WebDriverWait wait = new WebDriverWait(driver, duration);
@@ -109,6 +108,14 @@ public class Commons extends DriverManager {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static WebElement waitFluentForElementToBeClickable(WebElement element) {
+    return new FluentWait<>(driver)
+        .withTimeout(Duration.ofSeconds(wait))
+        .pollingEvery(Duration.ofMillis(500))
+        .ignoring(NoSuchElementException.class)
+        .until(ExpectedConditions.elementToBeClickable(element));
   }
 
 }

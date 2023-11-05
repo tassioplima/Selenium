@@ -50,7 +50,6 @@ public class MercedeContactDetailsPage extends PagesFactory{
     public void validateError() {
         Commons.scrollToElement(errorLabel);
         String assertion = errorLabel.getText();
-        System.out.println(assertion);
         assertEquals("An error has occurred.\n" +
                 "Please check the following sections:", assertion);
     }

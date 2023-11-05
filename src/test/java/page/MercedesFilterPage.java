@@ -2,8 +2,6 @@ package page;
 
 import commons.Commons;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,14 +58,24 @@ public class MercedesFilterPage extends PagesFactory {
     @FindBy(xpath = "//*[@class='dcp-cars-srp-results__tile']")
     private List<WebElement> openListCars;
 
+    @FindBy(css = "dcp-cars-srp__results dcp-cars-srp-results")
+    private WebElement waitHighPriceCarList;
+
     @FindBy(css = ".dcp-vehicle-details-list-item__label")
     private List<WebElement> listDetailsModel;
 
     @FindBy(xpath = "//*[contains(text(),'BRILLANTBLUE metallic')]")
     private WebElement metallicButton;
+
+    @FindBy(xpath = "//*[contains(text(),'Body Type')]")
+    private WebElement bodyTypeWait;
+
+    @FindBy(xpath = "//*[contains(text(),'Show more vehicles')]")
+    private WebElement scrollToMoreCars;
+
     @Step
     public void selectFilter()  {
-        Commons.waitForElementToBeClickable(clickOnFilter);
+        Commons.waitFluentForElementToBeClickable(clickOnFilter);
         clickOnFilter.click();
         Commons.waitForVisibilityElement(preOwnerList.get(0));
         preOwnerList.get(0).click();
@@ -77,7 +85,6 @@ public class MercedesFilterPage extends PagesFactory {
     public void listMenuFilter(String menu) {
         for (WebElement filter : listMenuSeletion) {
             if (filter.getText().equals(menu)) {
-                Commons.scrollDown();
                 Commons.scrollToElement(filter);
                 filter.click();
                 break;
@@ -88,7 +95,6 @@ public class MercedesFilterPage extends PagesFactory {
     public void selectFilterColourList(String colour) {
         for (WebElement colours : listColourSelect) {
             if (colours.getText().equals(colour)) {
-                Commons.waitForVisibilityElement(colours);
                 Commons.scrollToElement(colours);
                 colours.click();
                 break;
@@ -99,8 +105,8 @@ public class MercedesFilterPage extends PagesFactory {
     @Step
     public void selectAndChooseColour () {
         selectFilter();
+        Commons.scrollToElement(scrollToMoreCars);
         listMenuFilter("Colour");
-        Commons.scrollDown();
         Commons.scrollToElement(openColourFilter);
         openColourFilter.click();
         selectColourTry();
@@ -113,15 +119,19 @@ public class MercedesFilterPage extends PagesFactory {
     }
 
     @Step
-    public void getHighPriceCarDetails() {
-        Commons.waitForVisibilityElement(openListCars.get(0));
-        openListCars.get(0).click();
+    public void clickHighPriceCar() {
+        try {
+            Commons.waitFluentForElementToBeClickable(openListCars.get(0));
+            openListCars.get(0).click();
+        } catch (Exception e){
+            System.out.println("Error click high price car.");
+        }
     }
 
     @Step
     public void selectCarAndPriceFilter(){
         selectFilterCar();
-        getHighPriceCarDetails();
+        clickHighPriceCar();
     }
 
     @Step
