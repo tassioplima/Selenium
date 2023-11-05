@@ -138,8 +138,9 @@ public class MercedesPage extends PagesFactory {
 
   @Step
   public void selectContinue() {
-    Commons.waitFluentForElementToBeClickable(continueButtonXpath);
+    Commons.waitForElementToBeClickable(continueButtonXpath);
     continueButtonXpath.click();
+    Commons.waitForInvisibilityElement(continueButtonXpath);
   }
 
 }

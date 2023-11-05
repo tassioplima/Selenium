@@ -107,7 +107,6 @@ public class MercedesFilterPage extends PagesFactory {
         selectFilter();
         Commons.scrollToElement(scrollToMoreCars);
         listMenuFilter("Colour");
-        Commons.scrollDown();
         Commons.scrollToElement(openColourFilter);
         openColourFilter.click();
         selectColourTry();
