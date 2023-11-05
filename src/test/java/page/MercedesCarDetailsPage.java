@@ -64,7 +64,9 @@ public class MercedesCarDetailsPage extends PagesFactory{
 
     @Step
     public void detailsAndExport() {
+        Commons.scrollDown();
         returnListDetailsModel();
+        Commons.scrollDown();
         returnListDetailsVinNumber();
         Commons.exportFileString( "Model year: " + modelYear,"VIN: " +  vinNumber);
         clickEnquireNow();
