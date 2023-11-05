@@ -111,4 +111,12 @@ public class Commons extends DriverManager {
     }
   }
 
+  protected WebElement waitForElementToBeClickable(WebElement element) {
+    return new FluentWait<>(driver)
+        .withTimeout(Duration.ofSeconds(DEFAULT_TIME_WAIT))
+        .pollingEvery(Duration.ofMillis(500))
+        .ignoring(NoSuchElementException.class)
+        .until(ExpectedConditions.elementToBeClickable(element));
+  }
+
 }
