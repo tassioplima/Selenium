@@ -1,6 +1,7 @@
 package test;
 
 import driver.DriverManager;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.MercedeContactDetailsPage;
@@ -24,6 +25,7 @@ public class MercedesTest extends DriverManager {
   }
 
   @Test
+  @Description("Validate error on Mercedes form.")
   public void testMercedes() {
     mercedesPage.selectionState("New South Wales");
     mercedesPage.postalCodeInsert("2007");
