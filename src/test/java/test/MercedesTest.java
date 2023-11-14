@@ -1,29 +1,12 @@
 package test;
 
-import driver.DriverManager;
-import org.junit.jupiter.api.BeforeEach;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
-import page.MercedeContactDetailsPage;
-import page.MercedesCarDetailsPage;
-import page.MercedesFilterPage;
-import page.MercedesPage;
 
-public class MercedesTest extends DriverManager {
-
-  MercedesPage mercedesPage;
-  MercedesFilterPage mercedesFilterPage;
-  MercedesCarDetailsPage mercedesCarDetailsPage;
-  MercedeContactDetailsPage mercedeContactDetailsPage;
-
-  @BeforeEach
-  public void set() {
-    mercedesPage = new MercedesPage(driver);
-    mercedesFilterPage = new MercedesFilterPage(driver);
-    mercedesCarDetailsPage = new MercedesCarDetailsPage(driver);
-    mercedeContactDetailsPage = new MercedeContactDetailsPage(driver);
-  }
+public class MercedesTest extends BaseTest {
 
   @Test
+  @Description("Validate error on Mercedes form.")
   public void testMercedes() {
     mercedesPage.selectionState("New South Wales");
     mercedesPage.postalCodeInsert("2007");
