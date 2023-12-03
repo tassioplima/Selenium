@@ -8,7 +8,7 @@ Serve to see test results, PageObject and PageFactory structure.
 
 Configuration:
 
-- Java JDK +11
+- Java JDK +17
 
 Running test:
 
