@@ -13,7 +13,7 @@ Configuration:
 Running test:
 
 ``` bash
-./gradlew test --tests "MercedesTest"
+./gradlew test --tests "WikipediaTest"
 ```
 
 Running with different web drivers:
