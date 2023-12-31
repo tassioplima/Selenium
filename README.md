@@ -19,17 +19,17 @@ Running test:
 Running with different web drivers:
 
 ``` bash
-./gradlew test --tests "MercedesTest" -DBROWSER=chrome
+./gradlew test --tests "WikipediaTest" -DBROWSER=chrome
 ```
 
 ``` bash
-./gradlew test --tests "MercedesTest" -DBROWSER=firefox
+./gradlew test --tests "WikipediaTest" -DBROWSER=firefox
 ```
 
 Running headless:
 
 ``` bash
-./gradlew test --tests "MercedesTest" -DBROWSER=chrome -DHEADLESS=true
+./gradlew test --tests "WikipediaTest" -DBROWSER=chrome -DHEADLESS=true
 ```
 
 ### Building Allure report
